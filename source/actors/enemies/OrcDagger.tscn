@@ -1,16 +1,18 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://actors/BeatEmUpActor.gd" type="Script" id=1]
 [ext_resource path="res://areas/0x72_16x16DungeonTileset.v4.png" type="Texture" id=2]
 [ext_resource path="res://actors/Walk.gd" type="Script" id=3]
-[ext_resource path="res://actors/enemies/hammer_sfx.tres" type="AudioStream" id=4]
-[ext_resource path="res://actors/Attack.gd" type="Script" id=5]
-[ext_resource path="res://actors/HitBox.gd" type="Script" id=6]
-[ext_resource path="res://actors/HurtBox.gd" type="Script" id=7]
-[ext_resource path="res://actors/Health.gd" type="Script" id=8]
-[ext_resource path="res://actors/enemies/Sight.gd" type="Script" id=9]
-[ext_resource path="res://actors/enemies/Brain.gd" type="Script" id=10]
-[ext_resource path="res://actors/enemies/Points.gd" type="Script" id=11]
+[ext_resource path="res://actors/AttackDagger.tres" type="Animation" id=4]
+[ext_resource path="res://actors/enemies/hammer_sfx.tres" type="AudioStream" id=5]
+[ext_resource path="res://actors/Attack.gd" type="Script" id=6]
+[ext_resource path="res://actors/knifeSlice.tres" type="AudioStream" id=7]
+[ext_resource path="res://actors/HitBox.gd" type="Script" id=8]
+[ext_resource path="res://actors/HurtBox.gd" type="Script" id=9]
+[ext_resource path="res://actors/Health.gd" type="Script" id=10]
+[ext_resource path="res://actors/enemies/Sight.gd" type="Script" id=11]
+[ext_resource path="res://actors/enemies/Brain.gd" type="Script" id=12]
+[ext_resource path="res://actors/enemies/Points.gd" type="Script" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "AttackHammer"
@@ -91,13 +93,13 @@ tracks/5/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 4 )
+"stream": ExtResource( 5 )
 } ],
 "times": PoolRealArray( 0.45 )
 }
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 12.0599
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 8, 4.8 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 6, 8 )
@@ -122,41 +124,42 @@ z_index = 2
 texture = ExtResource( 2 )
 offset = Vector2( 0, -8 )
 region_enabled = true
-region_rect = Rect2( 32, 160, 16, 16 )
+region_rect = Rect2( 80, 160, 16, 16 )
 
 [node name="Walk" type="Node" parent="."]
 script = ExtResource( 3 )
-speed = 24.0
+speed = 80.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
+anims/AttackDagger = ExtResource( 4 )
 anims/AttackHammer = SubResource( 1 )
 
 [node name="WeaponLeft" type="Sprite" parent="."]
 position = Vector2( 4, -4 )
-rotation = 0.523599
+rotation = -1.57079
 z_index = 2
 texture = ExtResource( 2 )
 offset = Vector2( 0, -8 )
 flip_h = true
 region_enabled = true
-region_rect = Rect2( 120, 104, 8, 24 )
+region_rect = Rect2( 144, 96, 8, 16 )
 
 [node name="WeaponRight" type="Sprite" parent="."]
 visible = false
 position = Vector2( -4, -4 )
-rotation = -0.523599
+rotation = 1.57079
 z_index = 2
 texture = ExtResource( 2 )
 offset = Vector2( 0, -8 )
 region_enabled = true
-region_rect = Rect2( 120, 104, 8, 24 )
+region_rect = Rect2( 144, 96, 8, 16 )
 
 [node name="Attack" type="Node2D" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="Attack"]
-stream = ExtResource( 4 )
+stream = ExtResource( 7 )
 pitch_scale = 0.7
 
 [node name="HitBox" type="Area2D" parent="Attack" groups=[
@@ -164,17 +167,16 @@ pitch_scale = 0.7
 ]]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource( 6 )
-damage = 3
+script = ExtResource( 8 )
 
 [node name="Left" type="CollisionShape2D" parent="Attack/HitBox"]
 position = Vector2( -14, -5.2 )
-shape = SubResource( 2 )
+shape = SubResource( 7 )
 disabled = true
 
 [node name="Right" type="CollisionShape2D" parent="Attack/HitBox"]
 position = Vector2( 14, -5.2 )
-shape = SubResource( 2 )
+shape = SubResource( 7 )
 disabled = true
 
 [node name="CoolDown" type="Timer" parent="Attack"]
@@ -184,7 +186,7 @@ one_shot = true
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource( 7 )
+script = ExtResource( 9 )
 team = "enemy"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
@@ -192,20 +194,20 @@ position = Vector2( 0, -8 )
 shape = SubResource( 3 )
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource( 8 )
+script = ExtResource( 10 )
 
 [node name="Sight" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
-script = ExtResource( 9 )
+script = ExtResource( 11 )
 
 [node name="Range" type="CollisionShape2D" parent="Sight"]
 position = Vector2( 0, -8 )
 shape = SubResource( 4 )
 
 [node name="Brain" type="Node" parent="."]
-script = ExtResource( 10 )
-attack_range = 24.0
+script = ExtResource( 12 )
+attack_animation = "AttackDagger"
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 margin_left = -10.0
@@ -221,8 +223,8 @@ rounded = true
 percent_visible = false
 
 [node name="Points" type="Node" parent="."]
-script = ExtResource( 11 )
-reward = 5
+script = ExtResource( 13 )
+reward = 7
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
 [connection signal="amount_changed" from="Health" to="HealthBar" method="set_value"]
 [connection signal="depleated" from="Health" to="." method="queue_free"]
@@ -230,9 +232,9 @@ reward = 5
 [connection signal="area_exited" from="Sight" to="Sight" method="_on_area_exited"]
 [connection signal="missed" from="Sight" to="Brain" method="_on_Sight_missed"]
 [connection signal="spotted" from="Sight" to="Brain" method="_on_Sight_spotted"]
-[connection signal="turn_left" from="Brain" to="WeaponLeft" method="show"]
 [connection signal="turn_left" from="Brain" to="Sprite" method="set_flip_h" binds= [ false ]]
+[connection signal="turn_left" from="Brain" to="WeaponLeft" method="show"]
 [connection signal="turn_left" from="Brain" to="WeaponRight" method="hide"]
-[connection signal="turn_right" from="Brain" to="WeaponLeft" method="hide"]
 [connection signal="turn_right" from="Brain" to="Sprite" method="set_flip_h" binds= [ true ]]
+[connection signal="turn_right" from="Brain" to="WeaponLeft" method="hide"]
 [connection signal="turn_right" from="Brain" to="WeaponRight" method="show"]

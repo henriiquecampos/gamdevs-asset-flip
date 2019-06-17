@@ -5,7 +5,7 @@ func _ready():
 
 
 func _on_Score_score_changed(new_score):
-	$ScoreLabel.text = "Enemies Defeated: %s"%new_score
+	$ScoreLabel.text = "Score: %s"%new_score
 
 
 func show_replay_menu():

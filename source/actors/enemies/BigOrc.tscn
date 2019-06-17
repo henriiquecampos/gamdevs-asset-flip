@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://actors/BeatEmUpActor.gd" type="Script" id=1]
 [ext_resource path="res://areas/0x72_16x16DungeonTileset.v4.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://actors/Health.gd" type="Script" id=8]
 [ext_resource path="res://actors/enemies/Sight.gd" type="Script" id=9]
 [ext_resource path="res://actors/enemies/Brain.gd" type="Script" id=10]
+[ext_resource path="res://actors/enemies/Points.gd" type="Script" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "AttackHammer"
@@ -117,6 +118,7 @@ script = ExtResource( 1 )
 polygon = PoolVector2Array( -4, -4, 4, -4, 4, 0, -4, 0 )
 
 [node name="Sprite" type="Sprite" parent="."]
+z_index = 2
 texture = ExtResource( 2 )
 offset = Vector2( 0, -16 )
 region_enabled = true
@@ -125,7 +127,7 @@ region_rect = Rect2( 96, 176, 32, 32 )
 [node name="Walk" type="Node" parent="."]
 script = ExtResource( 3 )
 actor_path = NodePath("../../BigOrc")
-speed = 15.0
+speed = 8.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 0.75
@@ -134,6 +136,7 @@ anims/AttackHammer = SubResource( 1 )
 [node name="WeaponLeft" type="Sprite" parent="."]
 position = Vector2( 4, -4 )
 rotation = 0.523599
+z_index = 2
 texture = ExtResource( 2 )
 offset = Vector2( 0, -8 )
 flip_h = true
@@ -144,6 +147,7 @@ region_rect = Rect2( 240, 8, 16, 40 )
 visible = false
 position = Vector2( -4, -4 )
 rotation = -0.523599
+z_index = 2
 texture = ExtResource( 2 )
 offset = Vector2( 0, -8 )
 region_enabled = true
@@ -224,6 +228,10 @@ step = 1.0
 value = 12.0
 rounded = true
 percent_visible = false
+
+[node name="Points" type="Node" parent="."]
+script = ExtResource( 11 )
+reward = 30
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
 [connection signal="amount_changed" from="Health" to="HealthBar" method="set_value"]
 [connection signal="depleated" from="Health" to="." method="queue_free"]

@@ -31,3 +31,9 @@ func replenish():
 func _set_amount(value):
 	_amount = value
 	emit_signal("amount_changed", _amount)
+
+
+func heal(amount):
+	_amount += amount
+	_amount = min(_amount, max_health)
+	_set_amount(_amount)
