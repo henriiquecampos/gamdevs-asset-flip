@@ -22,4 +22,5 @@ func set_vertical_direction(new_vertical_direction):
 func stop():
 	vertical_direction = 0.0
 	horizontal_direction = 0.0
+	actor.velocity = Vector2.ZERO
 	set_physics_process(false)

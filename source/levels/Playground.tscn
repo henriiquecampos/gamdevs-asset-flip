@@ -1,0 +1,216 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://levels/Playground.gd" type="Script" id=1]
+[ext_resource path="res://areas/tile_set.tres" type="TileSet" id=2]
+[ext_resource path="res://levels/Camera2D.gd" type="Script" id=3]
+[ext_resource path="res://objects/Spawn.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/Spawn.gd" type="Script" id=5]
+[ext_resource path="res://levels/RandomTimer.gd" type="Script" id=6]
+[ext_resource path="res://actors/enemies/BigOrc.tscn" type="PackedScene" id=7]
+[ext_resource path="res://actors/BeatEmUpActor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://interface/Interface.tscn" type="PackedScene" id=9]
+[ext_resource path="res://interface/InterfaceLayer.gd" type="Script" id=10]
+[ext_resource path="res://interface/Kenney Pixel.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://interface/lose_sfx/you_lose.ogg" type="AudioStream" id=12]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+length = 4.0
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 8, 104 ), Vector2( 120, 104 ), Vector2( 120, 40 ), Vector2( 8, 40 ) ]
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 15
+font_data = ExtResource( 11 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.415686, 0.333333, 0.372549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.211765, 0.133333, 0.172549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.368627, 0.231373, 0.298039, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.368627, 0.231373, 0.298039, 1 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "Blink"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 2, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 2, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 2, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Playground" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 12.0, 128.0 ]
+}
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 536870912, 0, 2, 536870912, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 15, 0, 65536, 536870917, 0, 65537, 536870949, 0, 65538, 536870949, 0, 65539, 37, 0, 65540, 37, 0, 65541, 35, 0, 65542, 536870930, 0, 131072, 39, 0, 131073, 39, 0, 131074, 39, 0, 131075, 39, 0, 131076, 39, 0, 131077, 39, 0, 196608, 29, 0, 196609, 3, 0, 196610, 3, 0, 196611, 3, 0, 196612, 3, 0, 196613, 3, 0, 196614, 3, 0, 196615, 3, 0, 262144, 29, 0, 262145, 3, 0, 262146, 3, 0, 262147, 3, 0, 262148, 3, 0, 262149, 3, 0, 262150, 3, 0, 262151, 3, 0, 327680, 29, 0, 327681, 3, 0, 327682, 3, 0, 327683, 3, 0, 327684, 3, 0, 327685, 3, 0, 327686, 3, 0, 327687, 3, 0, 393216, 29, 0, 393217, 3, 0, 393218, 3, 0, 393219, 3, 0, 393220, 3, 0, 393221, 3, 0, 393222, 3, 0, 393223, 3, 0, 458752, 536870933, 0, 458753, 4, 0, 458754, 536870948, 0, 458755, 536870937, 0, 458756, 536870948, 0, 458757, 536870948, 0, 458758, 5, 0, 458759, 536870931, 0 )
+
+[node name="TileMap2" type="TileMap" parent="."]
+z_index = 1
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 65536, -1610612735, 0, 65543, -2147483647, 0, 131072, -1610612735, 0, 131079, -2147483647, 0, 196608, -1610612735, 0, 196615, -2147483647, 0, 262144, -1610612735, 0, 262151, -2147483647, 0, 327680, -1610612735, 0, 327687, -2147483647, 0, 393216, -1610612736, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, -2147483648, 0 )
+
+[node name="TileMap3" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 393216, 536870912, 0, 393223, 536870912, 0 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 44, 64 )
+current = true
+limit_left = 0
+limit_top = 12
+limit_right = 128
+limit_bottom = 128
+script = ExtResource( 3 )
+shake_strength = 0.5
+
+[node name="Duration" type="Timer" parent="Camera2D"]
+wait_time = 0.12
+one_shot = true
+
+[node name="OrcSpawn" parent="." instance=ExtResource( 4 )]
+position = Vector2( 45.1585, 40 )
+script = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OrcSpawn"]
+autoplay = "Idle"
+playback_speed = 0.25
+anims/Idle = SubResource( 1 )
+
+[node name="RandomTimer" type="Timer" parent="OrcSpawn"]
+wait_time = 10.0
+autostart = true
+script = ExtResource( 6 )
+min_wait_time = 5.0
+max_wait_time = 10.0
+
+[node name="BigOrcSpawn" parent="." instance=ExtResource( 4 )]
+position = Vector2( 64, 76 )
+script = ExtResource( 5 )
+spawnling = ExtResource( 7 )
+
+[node name="RandomTimer" type="Timer" parent="BigOrcSpawn"]
+wait_time = 10.0
+autostart = true
+script = ExtResource( 6 )
+min_wait_time = 30.0
+max_wait_time = 45.0
+
+[node name="Player" parent="." instance=ExtResource( 8 )]
+position = Vector2( 44, 64 )
+z_index = 1
+
+[node name="CameraRig" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Interface" parent="." instance=ExtResource( 9 )]
+z_index = 10
+
+[node name="InterfaceLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 10 )
+
+[node name="ScoreLabel" type="Label" parent="InterfaceLayer"]
+anchor_right = 1.0
+margin_bottom = 12.0
+custom_fonts/font = SubResource( 2 )
+text = "Enemies Defeated: 0"
+align = 1
+
+[node name="ReplayMenu" type="Panel" parent="InterfaceLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -25.0
+margin_top = -12.0
+margin_right = 28.0
+margin_bottom = 32.0
+
+[node name="MarginContainer" type="MarginContainer" parent="InterfaceLayer/ReplayMenu"]
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InterfaceLayer/ReplayMenu/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 46.0
+margin_bottom = 36.0
+
+[node name="Label" type="Label" parent="InterfaceLayer/ReplayMenu/MarginContainer/VBoxContainer"]
+margin_right = 42.0
+margin_bottom = 12.0
+custom_fonts/font = SubResource( 2 )
+text = "You Died!"
+
+[node name="RetryButton" type="Button" parent="InterfaceLayer/ReplayMenu/MarginContainer/VBoxContainer"]
+margin_top = 16.0
+margin_right = 42.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
+text = "Retry"
+
+[node name="LoseSFX" type="AudioStreamPlayer" parent="InterfaceLayer/ReplayMenu"]
+stream = ExtResource( 12 )
+bus = "SFX"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasModulate"]
+anims/Blink = SubResource( 7 )
+[connection signal="timeout" from="OrcSpawn/RandomTimer" to="OrcSpawn" method="spawn"]
+[connection signal="timeout" from="OrcSpawn/RandomTimer" to="OrcSpawn/RandomTimer" method="_on_timeout"]
+[connection signal="timeout" from="BigOrcSpawn/RandomTimer" to="BigOrcSpawn" method="spawn"]
+[connection signal="timeout" from="BigOrcSpawn/RandomTimer" to="BigOrcSpawn/RandomTimer" method="_on_timeout"]
+[connection signal="tree_exited" from="Player" to="." method="_on_Player_tree_exited"]
+[connection signal="draw" from="InterfaceLayer/ReplayMenu" to="InterfaceLayer/ReplayMenu/LoseSFX" method="play"]
+[connection signal="pressed" from="InterfaceLayer/ReplayMenu/MarginContainer/VBoxContainer/RetryButton" to="InterfaceLayer" method="_on_RetryButton_pressed"]

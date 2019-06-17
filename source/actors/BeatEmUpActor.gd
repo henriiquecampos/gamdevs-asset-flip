@@ -10,4 +10,3 @@ func _physics_process(delta):
 
 func handle_collision(collision):
 	pass
-

@@ -16,13 +16,25 @@ _global_script_class_icons={
 [application]
 
 config/name="Asset Flip"
+run/main_scene="res://levels/Playground.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Score="*res://meta/Score.tscn"
+BackgroundMusic="*res://interface/background_music/BackgroundMusic.tscn"
+
+[debug]
+
+gdscript/warnings/enable=false
 
 [display]
 
 window/size/width=128
 window/size/height=64
 window/size/fullscreen=true
+window/size/test_width=1280
+window/size/test_height=720
 window/stretch/mode="2d"
 window/stretch/aspect="keep_width"
 
@@ -55,11 +67,13 @@ down={
 attack={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
  ]
 }
 defend={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
  ]
 }
 dash={

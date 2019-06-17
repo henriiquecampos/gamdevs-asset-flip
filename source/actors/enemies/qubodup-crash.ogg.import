@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/qubodup-crash.ogg-9bc42dd2a39f25e2ab18f9222370a749.oggstr"
+
+[deps]
+
+source_file="res://actors/enemies/qubodup-crash.ogg"
+dest_files=[ "res://.import/qubodup-crash.ogg-9bc42dd2a39f25e2ab18f9222370a749.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

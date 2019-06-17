@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://interface/PopLabel.gd" type="Script" id=1]
+[ext_resource path="res://interface/Kenney Pixel Square.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 2
+outline_color = Color( 1, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="PopLabel" type="Node2D"]
+position = Vector2( 64, 28 )
+scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 1 )
+final_scale = Vector2( 0.5, 0.5 )
+float_distance = 8.0
+duration = 0.5
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -44.0
+margin_top = -16.0
+margin_right = 44.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 44, 16 )
+custom_fonts/font = SubResource( 1 )
+text = "SCORE"
+align = 1
+valign = 1
+
+[node name="Tween" type="Tween" parent="."]
