@@ -33,7 +33,7 @@ tracks/0/keys = {
 "values": [ Vector2( 96, 128 ), Vector2( 96, 432 ), Vector2( 448, 432 ), Vector2( 448, 128 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=2]
 resource_name = "Idle"
 length = 4.0
 loop = true
@@ -51,11 +51,11 @@ tracks/0/keys = {
 "values": [ Vector2( 96, 128 ), Vector2( 96, 432 ), Vector2( 448, 432 ), Vector2( 448, 128 ) ]
 }
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 15
 font_data = ExtResource( 12 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.415686, 0.333333, 0.372549, 1 )
 
 [sub_resource type="StyleBoxFlat" id=5]
@@ -68,11 +68,10 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.368627, 0.231373, 0.298039, 1 )
 
-[sub_resource type="Animation" id=7]
-resource_name = "Blink"
+[sub_resource type="Animation" id=8]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -149,7 +148,7 @@ spawnling = ExtResource( 7 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="OrcDagger"]
 autoplay = "Idle"
 playback_speed = 0.25
-anims/Idle = SubResource( 8 )
+anims/Idle = SubResource( 2 )
 
 [node name="RandomTimer" type="Timer" parent="OrcDagger"]
 wait_time = 10.0
@@ -186,7 +185,7 @@ script = ExtResource( 11 )
 [node name="ScoreLabel" type="Label" parent="InterfaceLayer"]
 anchor_right = 1.0
 margin_bottom = 12.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Enemies Defeated: 0"
 align = 1
 
@@ -218,7 +217,7 @@ margin_bottom = 36.0
 [node name="Label" type="Label" parent="InterfaceLayer/ReplayMenu/MarginContainer/VBoxContainer"]
 margin_right = 42.0
 margin_bottom = 12.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "You Died!"
 
 [node name="RetryButton" type="Button" parent="InterfaceLayer/ReplayMenu/MarginContainer/VBoxContainer"]
@@ -227,11 +226,11 @@ margin_right = 42.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 3 )
+custom_styles/hover = SubResource( 4 )
 custom_styles/pressed = SubResource( 5 )
 custom_styles/focus = SubResource( 6 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
 text = "Retry"
 
 [node name="LoseSFX" type="AudioStreamPlayer" parent="InterfaceLayer/ReplayMenu"]
@@ -241,7 +240,7 @@ bus = "SFX"
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasModulate"]
-anims/Blink = SubResource( 7 )
+anims/Blink = SubResource( 8 )
 
 [node name="HealthReplenishArea" parent="." instance=ExtResource( 14 )]
 position = Vector2( 224, 240 )
